@@ -56,7 +56,7 @@ public class No {
     }
 
     public void excluirNo(int numero){
-    /* ALGORITMO
+    /*ALGORITMO
        CMT 1 - Verificando primeiro o filho da esquerda do nó atual se é maior que a informação do pai, afim de saber se deve ir para a direita
        CMT 2 - Verificando se informação atual está na direita do pai
     */
@@ -96,41 +96,71 @@ public class No {
                 1.2 Caso o nó da esquerda não seja folha, então é iniciado uma recursividade até encontrar um nó na esquerda que seja folha.
             2 Caso o nó da direita seja folha, o nó removido é substituido pelo nó da direita.
         */
-
-        if(this.direita.isNoFolha()) {
-            No folha = this.direita;
-            this.pai.direita = folha;
-            folha.pai = this.pai;
-            folha.esquerda = this.esquerda;
-            folha.direita = null;
-        } else {
-            No folha = procurar_No_Folha(this.direita.esquerda);
-            if (this.pai.esquerda == this) {
-                this.pai.esquerda = folha;
-                if (folha.pai.esquerda == folha) {
-                    folha.pai.esquerda = folha.direita;
-                } else {
-                    folha.pai.direita = folha.direita;
-                }
+        if (this.pai == null) {
+            if(this.direita.esquerda == null) {
+                this.direita.esquerda = this.esquerda;
+                this.direita.pai = null;
             } else {
-                this.pai.direita = folha;
-                if (folha.pai.esquerda == folha) {
-                    folha.pai.esquerda = folha.direita;
+                No folha = procurar_No_Folha(this.direita.esquerda);
+                folha.pai = null;
+                folha.direita = this.direita;
+                folha.esquerda = this.esquerda;
+                this.direita.pai = folha;
+                this.esquerda.pai = folha;
+            }
+        } else {
+            if(this.direita.isNoFolha()) {
+                No folha = this.direita;
+                if (this.pai.direita == this) {
+                    this.pai.direita = folha;
                 } else {
-                    folha.pai.direita = folha.direita;
+                    this.pai.esquerda = folha;
+                }
+                folha.pai = this.pai;
+                folha.esquerda = this.esquerda;
+
+                this.esquerda.pai = folha;
+            } else {
+                if(this.direita.esquerda != null) {
+                    No folha = procurar_No_Folha(this.direita.esquerda);
+                    if (this.pai.esquerda == this) {
+                        this.pai.esquerda = folha;
+                        if (folha.pai.esquerda == folha) {
+                            folha.pai.esquerda = folha.direita;
+                        } else {
+                            folha.pai.direita = folha.direita;
+                        }
+                    } else {
+                        this.pai.direita = folha;
+                        if (folha.pai.esquerda == folha) {
+                            folha.pai.esquerda = folha.direita;
+                        } else {
+                            folha.pai.direita = folha.direita;
+                        }
+                    }
+                    folha.pai = this.pai;
+                    folha.esquerda = this.esquerda;
+                    folha.direita = this.direita;
+                } else {
+                    if (this.pai.direita == this) {
+                        this.pai.direita = this.direita;
+                    } else {
+                        this.pai.esquerda = this.direita;
+                    }
+                    this.direita.pai = this.pai;
+                    this.direita.esquerda = this.esquerda;
                 }
             }
-            folha.pai = this.pai;
-            folha.esquerda = this.esquerda;
-            folha.direita = this.direita;
         }
     }
 
     public void excluir_No_Com_Um_Filho_Null(No no_param){
         if (this.pai.direita == this) {
             this.pai.direita = no_param;
+            no_param.pai = this.pai;
         } else {
             this.pai.esquerda = no_param;
+            no_param.pai = this.pai;
         }
     }
 

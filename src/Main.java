@@ -44,9 +44,15 @@ public class Main {
         arvore.inserir(90);
         arvore.inserir(80);
         arvore.inserir(100);
+        arvore.inserir(31);
+        arvore.inserir(20);
+        arvore.inserir(19);
+
         TreePrinter(arvore);
         System.out.println();
-        arvore.remover(70);
+        System.out.println();
+        arvore.remover(50);
         TreePrinter(arvore);
+
     }
 }
