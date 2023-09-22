@@ -17,6 +17,11 @@ Projeto desenvolvido durante o 4º Período do curso de Engenharia de Software n
 
 3. Caso o novo elemento seja menor que o elemento do nó raiz, então o novo elemento é inserido na sub árvore da direita
 
+#### A árvore binária de busca possui:
+- Inserção
+- Busca
+- Remoção
+
 ## Implementação da Árvore Binária de Busca
 > A implementação foi realizada na linguagem *Java*.
 
@@ -59,3 +64,41 @@ Esse método é responsável pelo seguinte algoritmo:
 `public boolean isNoFolha()`
 
 Esse método retorna um valor booleano, verificando se o nó é um nó folha, essa verificação ocorre verificando se o nó da direita e esquerda são nulos. Se forem ele retorna o valor `true`, caso não seja retorna o valor `false`.
+
+### Excluir nó com dois filhos
+`public void excluir_No_Com_Dois_Filhos`
+
+Esse método é responsável pelo seguinte algoritmo: <br>
+
+Se um nó com dois filhos será excluido, primeiramente deve ser verificado se o nó da direita é folha:
+
+1. Caso o nó da direita não seja folha, é verificado se o nó da esquerda é folha. <br>
+    1.1 Caso o nó da esquerda seja folha, então o nó removido é substituído pelo nó da esquerda.<br>
+    1.2 Caso o nó da esquerda não seja folha, então é iniciado uma recursividade até encontrar um nó na esquerda que seja folha.<br>
+2. Caso o nó da direita seja folha, o nó removido é substituido pelo nó da direita.
+
+### Excluir nó com um filho nulo
+`public void excluir_No_Com_Um_Filho_Null(No no_param)`
+
+Esse método é responsável pelo seguinte algoritmo: <br>
+
+1. Verifica se o nó em que o método é chamado (this) é o filho direito de seu pai <br>
+    1.1 - Se o nó atual for o filho direito de seu pai, essa linha substitui o filho direito do pai pelo nó especificado como `no_param`. Em essência, isso está substituindo o nó atual (que possui um filho nulo) pelo no_param na posição do filho direito do pai. <br>
+    1.2 - Atualiza o pai do `no_param` para ser o mesmo pai do nó que está sendo excluído.
+    
+2. Caso não seja, faz a substituição do filho esquerdo do pai pelo no_param.
+
+### Procurar o nó folha
+`public No procurar_No_Folha(No noPartida)`
+
+1. Dentro desse método possui um laço de repetição while true, que percorre a árvore para encontrar o nó folha
+2. Ao encontrar o nó folha (para fazer a identificação os filhos serão nulos) atribuindo as variáveis de `noPartida` no `nóFolha`. 
+3. Caso o lado esquerdo não seja nulo, atribuimos o no lado esquerdo para apontar o filho esquerdo do `noPartida`.
+
+### Excluir nó folha
+`public void excluir_No_Folha()`
+
+1. Verifica se o nó atual é o filho esquerdo do seu pai. <br>
+1.1 - Caso o nó atual seja o filho esquerdo do pai, definimos ele como nulo, removendo a ligação com o pai e acaba excluindo do nó atual (nó filho).
+2. Caso o nó atual seja o filho direito, ele faz a mesma coisa, define o nó atual como valor `null`.
+

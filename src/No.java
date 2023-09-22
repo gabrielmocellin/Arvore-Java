@@ -185,10 +185,6 @@ public class No {
         }
     }
 
-
-
-
-
     public int getInformacao() {
         return informacao;
     }
