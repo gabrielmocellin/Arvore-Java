@@ -11,6 +11,9 @@ Projeto desenvolvido durante o 4º Período do curso de Engenharia de Software n
 ## O que é Árvore Binária de Busca?
 É uma estrutura de dados de uma lista não-linear, a árvore binária de busca é uma árvore binária que segue uma regra especial para organizar seus elementos.
 
+![301e011b6cbfd51d9f76160cc8013892f0417681](https://github.com/gabrielmocellin/Arvore-Java/assets/96633512/ac7d92a1-4b46-4d3b-a916-b5be7e999e5b)
+
+
 1. Se ainda não há nó raiz, então o novo elemento será o próprio nó raiz
 
 2. Se há nó raiz, então deve comparar o novo elemento com o nó raiz. 
@@ -102,3 +105,4 @@ Esse método é responsável pelo seguinte algoritmo: <br>
 1.1 - Caso o nó atual seja o filho esquerdo do pai, definimos ele como nulo, removendo a ligação com o pai e acaba excluindo do nó atual (nó filho).
 2. Caso o nó atual seja o filho direito, ele faz a mesma coisa, define o nó atual como valor `null`.
 
+## Screenshots do Prompt
