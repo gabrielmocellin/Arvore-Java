@@ -5,6 +5,10 @@ public class Arvore {
         this.raiz = new No(raiz, null);
     }
 
+    public boolean isVazia(){
+        return this.raiz == null;
+    }
+
     public void inserir(int numero){
         this.raiz.adicionarNumero(numero);
     }
@@ -14,7 +18,9 @@ public class Arvore {
     }
 
     public void remover(int numero) {
-        this.raiz.excluirNo(numero);
+        if (buscar(numero)) {
+            raiz = raiz.excluirNo(numero, raiz);
+        }
     }
 
     public No getRaiz() {
