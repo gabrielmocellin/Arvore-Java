@@ -70,10 +70,10 @@ public class No {
                 raiz = excluir_No_Folha(raiz);
             }
             else if (filho_Esquerdo_Eh_Null()) {
-                raiz = excluir_No_Com_Um_Filho_Null(this.direita);
+                raiz = excluir_No_Com_Um_Filho_Null(this.direita, raiz);
             }
             else if (filho_Direito_Eh_Null()) {
-                raiz = excluir_No_Com_Um_Filho_Null(this.esquerda);
+                raiz = excluir_No_Com_Um_Filho_Null(this.esquerda, raiz);
             }
             else {
                 raiz = excluir_No_Com_Dois_Filhos(raiz);
@@ -103,8 +103,11 @@ public class No {
         return raiz;
     }
 
-    public No excluir_No_Com_Um_Filho_Null(No sucessor){ // ************* COMO TROCAR O ATRIBUTO RAIZ DA ÁRVORE DAQUI? *****************
-        if(!isRaiz()){
+    public No excluir_No_Com_Um_Filho_Null(No sucessor, No raiz){ // ************* COMO TROCAR O ATRIBUTO RAIZ DA ÁRVORE DAQUI? *****************
+        if (isRaiz()) {
+            raiz = sucessor;
+        }
+        else {
             if (this.pai.direita == this) { // Verificar se o nó atual que será excluído está na direita (é maior) que o pai
                 this.pai.direita = sucessor; // A referência do pai para o filho é retirada
             } else {
@@ -112,7 +115,7 @@ public class No {
             }
         }
         sucessor.pai = this.pai; // Pode ser nó qualquer ou null
-        return sucessor;
+        return raiz;
     }
 
     /*

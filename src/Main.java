@@ -1,63 +1,106 @@
+import java.util.Scanner;
 
 public class Main {
-    public static int height(No raiz) {
-        if (raiz == null)
-            return 0;
-        return Math.max(height(raiz.getesquerda()), height(raiz.getdireita())) + 1;
-    }
+    public static void main(String[] args) {
+        Arvore arvore = Arvore.criarArvore_Base();
 
-    public static int getcol(int h) {
-        if (h == 1)
-            return 1;
-        return getcol(h - 1) + getcol(h - 1) + 1;
-    }
-
-    public static void printTree(int[][] M, No root, int col, int row, int height) {
-        if (root == null)
-            return;
-        M[row][col] = root.getChave();
-        printTree(M, root.getesquerda(), col - (int)Math.pow(2, height - 2), row + 1, height - 1);
-        printTree(M, root.getdireita(), col + (int)Math.pow(2, height - 2), row + 1, height - 1);
-    }
-
-    public static void TreePrinter(Arvore tree) {
-        if(tree.isVazia()) {
-            System.out.println("Árvore vazia.");
-        }
-        else {
-            int h = height(tree.getRaiz());
-            int col = getcol(h);
-            int[][] M = new int[h][col];
-            printTree(M, tree.getRaiz(), col / 2, 0, h);
-            for (int i = 0; i < h; i++) {
-                for (int j = 0; j < col; j++) {
-                    if (M[i][j] == 0)
-                        System.out.print("  ");
-                    else
-                        System.out.print(M[i][j] + " ");
-                }
-                System.out.println();
+        boolean desligar = false;
+        while (!desligar) {
+            int acao = printMenu(arvore);
+            switch (acao) {
+                case 1:
+                    inserirNumero(arvore);
+                    break;
+                case 2:
+                    buscarNumero(arvore);
+                    break;
+                case 3:
+                    removerNumero(arvore);
+                    break;
+                case 4:
+                    desligar = true;
+                    break;
+                default:
+                    System.out.println("Digite uma opção válida!");
+                    break;
             }
         }
     }
+     public static int printMenu(Arvore arvore) {
+        limparTela();
+        Printer.imprimirArvore(arvore);
+        return input("""
+                Ações:
+                1- Inserir número.
+                2- Buscar número.
+                3- Excluir número.
+                4- Encerrar programa.
+                Digite o número da ação que deseja efetuar:\s""");
+     }
 
-    public static void main(String[] args) {
-        Arvore arvore = new Arvore(50);
-        arvore.inserir(55);
-        arvore.inserir(60);
-        arvore.inserir(61);
-        arvore.inserir(59);
+     public static void inserirNumero(Arvore arvore){
+         limparTela();
+         Printer.imprimirArvore(arvore);
 
-        TreePrinter(arvore);System.out.println("\n");
-        arvore.remover(50);
-        TreePrinter(arvore);System.out.println("\n");
-        arvore.remover(55);
-        TreePrinter(arvore);System.out.println("\n");
-        arvore.remover(59);
-        TreePrinter(arvore);System.out.println("\n");
-        arvore.remover(60);
-        TreePrinter(arvore);System.out.println("\n");
-        arvore.remover(61);
-        TreePrinter(arvore);System.out.println("\n");
+         while(true) {
+             System.out.println("Insira 0 (zero) para voltar ao menu principal.");
+             int numero = input("Digite o número que será adicionado: ");
+             if(numero == 0) {
+                 break;
+             }
+             arvore.inserir(numero);
+             Printer.imprimirArvore(arvore);
+         }
+     }
+
+     public static void buscarNumero(Arvore arvore) {
+         limparTela();
+         Printer.imprimirArvore(arvore);
+         int numero = input("Insira o número que deseja buscar: ");
+         System.out.println();
+
+         if (arvore.buscar(numero)) {
+             System.out.println("O número " + numero + " ESTÁ presente na árvore.");
+         }
+         else {
+             System.out.println("O número " + numero + " NÃO ESTÁ presente na árvore.");
+         }
+
+         numero = input("1- Sim\n2- Não\nDeseja buscar outro número: ");
+         if (numero == 1) {
+             buscarNumero(arvore);
+         }
+     }
+
+    public static void removerNumero(Arvore arvore) {
+        limparTela();
+        Printer.imprimirArvore(arvore);
+        int numero = input("Insira o número que deseja remover da árvore: ");
+        limparTela();
+
+        if (arvore.buscar(numero)) {
+            arvore.remover(numero);
+            System.out.println("O número " + numero + " foi removido e a árvore ficou assim:");
+            Printer.imprimirArvore(arvore);
+        }
+        else {
+            System.out.println("O número " + numero + " NÃO ESTÁ presente na árvore.");
+        }
+
+        numero = input("1- Sim\n2- Não\nDeseja remover outro número: ");
+        if (numero == 1) {
+            removerNumero(arvore);
+        }
+    }
+
+    public static int input(String msg) {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print(msg);
+        return teclado.nextInt();
+    }
+    public static void limparTela() {
+        for (int i=0; i<50; i++) {
+            System.out.println();
+        }
     }
 }
