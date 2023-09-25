@@ -57,10 +57,12 @@ Esse método é responsável pelo seguinte algoritmo:
 5. Caso não seja nulo a função é chamada recursivamente no filho a esquerda do nó atual
 
 ### Excluir o nó
-`public void excluirNo(int numero)`
+`public No excluirNo(int numero, No raiz)`
 
-1. CMT 1 - Verificando primeiro o filho da esquerda do nó atual se é maior que a informação do pai, afim de saber se deve ir para a direita
-2. CMT 2 - Verificando se informação atual está na direita do pai
+1. Verifica se o valor passado como `numero` é igual `chave`<br>
+1.1 - Verifica se o nó é folha, caso seja atualiza o valor da `raiz` <br>
+2. Caso não seja, verifica se o `numero` passado com parametro é menor que a `chave` retornando o método `this.esquerda.excluirNo(numero, raiz);`.
+Caso ele seja maior ele retorna o método `this.direita.excluirNo(numero, raiz);`.
 
 
 ### Verificação se o nó é folha
@@ -81,15 +83,15 @@ Se um nó com dois filhos será excluido, primeiramente deve ser verificado se o
 2. Caso o nó da direita seja folha, o nó removido é substituido pelo nó da direita.
 
 ### Excluir nó com um filho nulo
-`public void excluir_No_Com_Um_Filho_Null(No no_param)`
+` public No excluir_No_Com_Um_Filho_Null(No sucessor, No raiz)`
 
 Esse método é responsável pelo seguinte algoritmo: <br>
 
-1. Verifica se o nó em que o método é chamado (this) é o filho direito de seu pai <br>
-    1.1 - Se o nó atual for o filho direito de seu pai, essa linha substitui o filho direito do pai pelo nó especificado como `no_param`. Em essência, isso está substituindo o nó atual (que possui um filho nulo) pelo no_param na posição do filho direito do pai. <br>
-    1.2 - Atualiza o pai do `no_param` para ser o mesmo pai do nó que está sendo excluído.
-    
-2. Caso não seja, faz a substituição do filho esquerdo do pai pelo no_param.
+1. Verifica se o nó é raiz<br>
+    1.1 - Se o nó atual for raiz, ele se torna o seu sucessor. <br>
+2. Caso não seja verifica se o nó atual (que será excluido) que está do lado direito é maior que o pai.
+3. A referência do pai para o filho direito é atualizada para apontar para o nó `sucessor`
+4. Caso não seja, a referência do pai para o filho esquerdo é atualizada para apontar para o nó sucessor, efetivamente removendo a ligação entre o pai e o nó atual. Atualizar as referências do pai para o filho. Retornando a raiz logo em seguida.
 
 ### Procurar o nó folha
 `public No procurar_No_Folha(No noPartida)`
@@ -104,5 +106,12 @@ Esse método é responsável pelo seguinte algoritmo: <br>
 1. Verifica se o nó atual é o filho esquerdo do seu pai. <br>
 1.1 - Caso o nó atual seja o filho esquerdo do pai, definimos ele como nulo, removendo a ligação com o pai e acaba excluindo do nó atual (nó filho).
 2. Caso o nó atual seja o filho direito, ele faz a mesma coisa, define o nó atual como valor `null`.
+
+
+### Procurar sucessor
+`public No procurar_Sucessor(No noPartida)`
+ 1. Ele inicia a busca descendo pela árvore à esquerda até encontrar o nó mais à esquerda, que é o nó sucessor <br>
+ 2. Corta a relação de parentesco do sucessor com seu pai, para que possa ser removido ou movido posteriormente, se necessário <br>
+ 3. Retorna o nó sucessor
 
 ## Screenshots do Prompt
