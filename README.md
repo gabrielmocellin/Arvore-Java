@@ -11,7 +11,7 @@ Projeto desenvolvido durante o 4º Período do curso de Engenharia de Software n
 ## O que é Árvore Binária de Busca?
 É uma estrutura de dados de uma lista não-linear, a árvore binária de busca é uma árvore binária que segue uma regra especial para organizar seus elementos.
 
-![301e011b6cbfd51d9f76160cc8013892f0417681](https://github.com/gabrielmocellin/Arvore-Java/assets/96633512/ac7d92a1-4b46-4d3b-a916-b5be7e999e5b)
+![Imagem árvore binária](https://github.com/gabrielmocellin/Arvore-Java/assets/96633512/652a94c4-a93a-4932-bd8f-75cee9400390)
 
 
 1. Se ainda não há nó raiz, então o novo elemento será o próprio nó raiz
@@ -114,4 +114,15 @@ Esse método é responsável pelo seguinte algoritmo: <br>
  2. Corta a relação de parentesco do sucessor com seu pai, para que possa ser removido ou movido posteriormente, se necessário <br>
  3. Retorna o nó sucessor
 
+### Função de print
+Foi alocada um arquivo somente para a função de print, chamada de `printer`.
+1. O método de `height(No raiz)` calcula a altura da árvore, ou seja, a distância máxima da raiz até uma folha.
+2. O método de `getcol(int h)` calcula o número de colunas necessárias para a impressão da árvore com base na altura.
+3. O método de `printTree(int[][] M, No root, int col, int row, int height)` preenche uma matriz com os valores dos nós da árvore de acordo com sua posição na impressão.
+4. O método de `imprimirArvore(Arvore tree)` faz a função de imprimir a matriz gerada.
+
 ## Screenshots do Prompt
+### Imagem da impressão
+![Prompt 1](https://github.com/gabrielmocellin/Arvore-Java/assets/96633512/77691cf4-4c74-43b6-832f-f4dfee52a616)
+
+
