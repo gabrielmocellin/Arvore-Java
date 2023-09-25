@@ -119,11 +119,9 @@ public class No {
     }
 
     /*
-    Se um nó com dois filhos será excluido, primeiramente deve ser verificado se o nó da direita é folha:
-    1 Caso o nó da direita não seja folha, é verificado se o nó da esquerda é folha.
-        1.1 Caso o nó da esquerda seja folha, então o nó removido é substituído pelo nó da esquerda.
-        1.2 Caso o nó da esquerda não seja folha, então é iniciado uma recursividade até encontrar um nó na esquerda que seja folha.
-    2 Caso o nó da direita seja folha, o nó removido é substituido pelo nó da direita.
+    Se um nó com dois filhos será excluido, primeiramente procuramos o seu sucessor
+    Utilizamos a regra de "maior valor mais próximo"
+    Exemplo: excluindo o número 30, procuramos o valor mais próximo de 31
     */
     public No excluir_No_Com_Dois_Filhos(No raiz){
         No sucessor = procurar_Sucessor(this.direita);
@@ -133,12 +131,9 @@ public class No {
                 sucessor.direita = raiz.direita;
             }
             sucessor.esquerda = raiz.esquerda;
-
-//            sucessor.esquerda = raiz.esquerda;
-//            sucessor.direita = raiz.direita;
             return sucessor;
         } else{
-            //Depois colocamos o sucessor na posição do NÓ que queremos remover
+            // Colocamos o sucessor na posição do NÓ que queremos remover
             sucessor.pai = this.pai;
             sucessor.esquerda = this.esquerda;
             if(this.pai.esquerda == this) {
@@ -149,15 +144,16 @@ public class No {
             }
             this.esquerda.pai = sucessor;
 
-            //Por fim precisamos arrumar o filho direito do sucessor
+            // Por fim precisamos arrumar o filho direito do sucessor
             if(this.direita != null) {
-                //Este if verifica se tem algo à direita do NÓ que removemos da árvore, caso tenha precisamos colocar
+                // Este if verifica se tem algo à direita do NÓ que removemos da árvore, caso tenha, precisamos colocar
                 // à direita do sucessor
                 if(sucessor.direita == null) {
                     this.direita.pai = sucessor;
                     sucessor.direita = this.direita;
                 }
                 else {
+                    // Caso o sucessor já tenha filhos a sua direita, precisamos dar prioridade a eles
                     No ultimoFilho_Sucessor = procurar_Ultimo_Filho_Direito_Do_Sucessor(sucessor);
                     ultimoFilho_Sucessor.direita = this.direita;
                     this.direita.pai = ultimoFilho_Sucessor;
@@ -178,7 +174,7 @@ public class No {
             }
         }
 
-        //Primeiro cortamos a relação de parentesco do sucessor (já que vamos subi-lo na árvore)
+        // Antes de retornar o sucessor cortamos a relação de parentesco dele (já que vamos subi-lo na árvore)
         if(sucessor.pai.esquerda == sucessor) {
             sucessor.pai.esquerda = null;
         }
